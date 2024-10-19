@@ -1,0 +1,24 @@
+name: cotopia-lite-backend
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create virtual environment
+        run: python -m venv .venv
+      - name: Activate virtual environment
+        run: source .venv/bin/activate
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Build environment
+        run: build .env
